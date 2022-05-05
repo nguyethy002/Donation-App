@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import "./styles/App.sass";
+import { DonatorCard } from "./components/DonatorCard";
+import { DonatorForm } from "./components/DonatorForm";
+import { placeHolderUsers } from "./data/db";
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <DonatorForm />
+      {placeHolderUsers.map((donator) => (
+        <DonatorCard
+          userName={donator.userName}
+          cardNumber={donator.cardNumber}
+          ccv={donator.ccv}
+          donatedAmount={donator.donatedAmount}
+          note={donator.note}
+        />
+      ))}
     </div>
   );
 }
