@@ -2,6 +2,8 @@ import { useState } from "react";
 import "../styles/components/DonatorForm.sass";
 import { placeHolderUsers } from "../data/db";
 import { DonatedCardProps } from "./DonatorCard";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
+import { addADonationToDonationList } from "../redux/donation";
 
 export const DonatorForm = () => {
   const [userName, setName] = useState("");
@@ -9,8 +11,10 @@ export const DonatorForm = () => {
   const [ccv, setCCV] = useState("");
   const [donatedAmount, setAmount] = useState("");
   const [note, setNote] = useState("");
-  const [donationList, setDonationList] =
-    useState<DonatedCardProps[]>(placeHolderUsers);
+  // const [donationList, setDonationList] =
+  //   useState<DonatedCardProps[]>(placeHolderUsers);
+
+  const dispatch = useAppDispatch()
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -21,10 +25,11 @@ export const DonatorForm = () => {
       donatedAmount: parseInt(donatedAmount),
       note,
     };
+    dispatch(addADonationToDonationList(donation))
     // setDonationList([...donationList, donation]);
-    const newarray = ...donationList;
-    newarray.push(donation);
-    setDonationList(newarray);
+    // const newarray = ...donationList;
+    // newarray.push(donation);
+    // setDonationList(newarray);
   };
 
   return (

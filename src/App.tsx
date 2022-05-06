@@ -1,17 +1,16 @@
-import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import "./styles/App.sass";
 import { DonatorCard } from "./components/DonatorCard";
 import { DonatorForm } from "./components/DonatorForm";
-import { placeHolderUsers } from "./data/db";
+import { useAppSelector } from "./redux/hooks";
 
 
 function App() {
+    const donationList = useAppSelector((state) => state.donation);
   return (
     <div className="App">
       <DonatorForm />
-      {placeHolderUsers.map((donator) => (
+      {donationList.donationList.map((donator) => (
         <DonatorCard
           userName={donator.userName}
           cardNumber={donator.cardNumber}
